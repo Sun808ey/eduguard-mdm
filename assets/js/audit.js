@@ -1,60 +1,53 @@
 import { RECENT_AUDIT_LOG } from './mock-data.js';
 
-const STORAGE_KEY = 'eduguard.auditEntries.v1';
-let memoryAuditEntries = null;
+const API_BASE_URL = 'http://127.0.0.1:3000';
 
 function getInitialAuditEntries() {
   return RECENT_AUDIT_LOG.map((entry) => ({ ...entry }));
 }
 
-function canUseLocalStorage() {
+async function loadAuditEntries() {
   try {
-    return typeof window !== 'undefined' && !!window.localStorage;
-  } catch (error) {
-    return false;
-  }
-}
+    const response = await fetch(`${API_BASE_URL}/audit-entries`, {
+      headers: { Accept: 'application/json' },
+    });
 
-function loadAuditEntries() {
-  if (memoryAuditEntries) return memoryAuditEntries.map((entry) => ({ ...entry }));
-
-  if (canUseLocalStorage()) {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed) && parsed.length) {
-          memoryAuditEntries = parsed;
-          return parsed.map((entry) => ({ ...entry }));
-        }
-      }
-    } catch (error) {
-      // Fall through to seeded defaults.
+    if (!response.ok) {
+      throw new Error(`Failed to load audit entries: ${response.status}`);
     }
-  }
 
-  memoryAuditEntries = getInitialAuditEntries();
-  persistAuditEntries(memoryAuditEntries);
-  return memoryAuditEntries.map((entry) => ({ ...entry }));
-}
+    const payload = await response.json();
+    if (Array.isArray(payload)) {
+      return payload;
+    }
 
-function persistAuditEntries(entries) {
-  memoryAuditEntries = entries.map((entry) => ({ ...entry }));
-
-  if (!canUseLocalStorage()) return;
-
-  try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(memoryAuditEntries));
+    if (Array.isArray(payload.entries)) {
+      return payload.entries;
+    }
   } catch (error) {
-    // Persistence is best-effort; keep the in-memory copy alive.
+    console.warn('Falling back to seeded audit entries.', error);
   }
+
+  return getInitialAuditEntries();
 }
 
-function appendAuditEntry(entry) {
-  const currentEntries = loadAuditEntries();
-  const nextEntries = [entry, ...currentEntries].slice(0, 100);
-  persistAuditEntries(nextEntries);
-  return nextEntries.map((item) => ({ ...item }));
+async function appendAuditEntry(entry) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/audit-entries`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(entry),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to persist audit entry: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.warn('Audit entry persistence failed.', error);
+    return null;
+  }
 }
 
 function createPseudoHash(seed) {
@@ -82,14 +75,13 @@ function renderAuditControls(container) {
   const historyBtn = controls.querySelector('[data-audit-history]');
   const result = controls.querySelector('[data-audit-result]');
 
-  verifyBtn.addEventListener('click', () => {
-    const auditEntries = loadAuditEntries();
-    const verification = verifyChain(auditEntries);
+  verifyBtn.addEventListener('click', async () => {
+    const verification = await fetchAuditVerification();
     if (verification.ok) {
       result.textContent = `Verified: ${verification.message}`;
       result.classList.remove('audit-result--bad');
       result.classList.add('audit-result--ok');
-      appendAuditEntry({
+      await appendAuditEntry({
         eventType: 'Verification',
         description: 'Audit chain verified from the dashboard',
         hash: createPseudoHash('verification-ok'),
@@ -99,7 +91,7 @@ function renderAuditControls(container) {
       result.textContent = `Broken: ${verification.message}`;
       result.classList.remove('audit-result--ok');
       result.classList.add('audit-result--bad');
-      appendAuditEntry({
+      await appendAuditEntry({
         eventType: 'Verification',
         description: `Audit chain check failed: ${verification.message}`,
         hash: createPseudoHash('verification-failed'),
@@ -108,9 +100,30 @@ function renderAuditControls(container) {
     }
   });
 
-  historyBtn.addEventListener('click', () => {
-    openAuditHistoryModal(loadAuditEntries());
+  historyBtn.addEventListener('click', async () => {
+    openAuditHistoryModal(await loadAuditEntries());
   });
+}
+
+async function fetchAuditVerification() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/audit-entries/verify`, {
+      headers: { Accept: 'application/json' },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to verify audit entries: ${response.status}`);
+    }
+
+    const payload = await response.json();
+    if (typeof payload.ok === 'boolean' && typeof payload.message === 'string') {
+      return payload;
+    }
+  } catch (error) {
+    console.warn('Falling back to client-side audit verification.', error);
+  }
+
+  return verifyChain(await loadAuditEntries());
 }
 
 function verifyChain(entries) {
@@ -226,11 +239,11 @@ function showAuditDetail(entry) {
     }
   });
 
-  modal.querySelector('[data-audit-verify-single]').addEventListener('click', () => {
+  modal.querySelector('[data-audit-verify-single]').addEventListener('click', async () => {
     // Lightweight single-entry check: ensure hash is non-empty and timestamp parseable
     if (entry.hash && !Number.isNaN(new Date(entry.timestamp).getTime())) {
       alert('Entry appears well-formed');
-      appendAuditEntry({
+      await appendAuditEntry({
         eventType: 'Detail View',
         description: `Viewed audit entry ${entry.eventType}`,
         hash: createPseudoHash(`detail-view:${entry.hash}`),
