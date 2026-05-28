@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Secure EduGuard MDM admin login with mock 2FA for prototype testing." />
+    <meta name="theme-color" content="#07111A" />
+    <title>EduGuard MDM — Admin Login</title>
+    <link rel="icon" href="assets/img/favicon.ico" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/login.css" />
+    <script src="assets/js/login.js" defer></script>
+  </head>
+  <body class="login-page">
+    <main class="login-shell">
+      <section class="login-card" aria-labelledby="login-title">
+        <div class="login-brand">
+          <img src="assets/img/logo.svg" alt="EduGuard MDM" class="login-brand__logo" />
+          <div>
+            <p class="login-brand__eyebrow">EduGuard MDM</p>
+            <h1 id="login-title">Admin Login</h1>
+          </div>
+        </div>
+
+        <p class="login-card__intro">
+          Sign in with your school admin account, then confirm the 2FA code to continue to the dashboard.
+        </p>
+
+        <form class="login-form" id="login-form" novalidate>
+          <div class="field-group">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="username" placeholder="admin@eduguard-mdm.ug" required />
+            <p class="field-error" id="email-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field-group">
+            <label for="password">Password</label>
+            <div class="password-field">
+              <input id="password" name="password" type="password" autocomplete="current-password" placeholder="EduGuard2025" required />
+              <button class="password-toggle" type="button" data-password-toggle aria-label="Show password">Show</button>
+            </div>
+            <p class="field-error" id="password-error" aria-live="polite"></p>
+          </div>
+
+          <div class="twofa-step" data-twofa-step hidden>
+            <div class="twofa-step__header">
+              <div>
+                <h2>2FA verification</h2>
+                <p>Enter the 6-digit demo code to continue. This step simulates TOTP verification for the prototype.</p>
+              </div>
+              <span class="badge badge--syncing">2FA required</span>
+            </div>
+
+            <div class="otp-group" role="group" aria-label="Two factor authentication code">
+              <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 1" data-otp-input />
+              <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 2" data-otp-input />
+              <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 3" data-otp-input />
+              <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 4" data-otp-input />
+              <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 5" data-otp-input />
+              <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 6" data-otp-input />
+            </div>
+
+            <p class="twofa-note">Demo TOTP code: <strong>246810</strong></p>
+            <p class="field-error" id="otp-error" aria-live="polite"></p>
+          </div>
+
+          <div class="login-status" id="login-status" aria-live="polite"></div>
+
+          <button class="btn btn-primary btn-lg login-submit" type="submit" data-submit-button>
+            Sign in
+          </button>
+        </form>
+
+        <p class="login-card__hint">
+          Mock credentials: <strong>admin@eduguard-mdm.ug</strong> / <strong>EduGuard2025</strong>
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

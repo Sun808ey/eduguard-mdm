@@ -1,0 +1,31 @@
+# EduGuard MDM — Frontend (eduguard-mdm)
+
+This repository is the frontend for the EduGuard MDM proof-of-concept MVP.
+
+Step 1 completed here: initial project skeleton and placeholder files.
+
+Next steps:
+- Implement design tokens and global styles (Step 2)
+- Build component library (Step 3)
+
+See the [docs/architecture.md](docs/architecture.md) for high-level notes.
+
+Windows (PowerShell) quick-start:
+
+```powershell
+cd "c:\Users\SUN\Downloads\Compressed\Eduguard-main\Eduguard-main\eduguard-mdm"
+git init
+git add .
+git commit -m "chore: init eduguard-mdm project skeleton"
+code .
+```
+
+macOS / Linux (bash):
+
+```bash
+cd /path/to/Eduguard-main/Eduguard-main/eduguard-mdm
+git init
+git add .
+git commit -m "chore: init eduguard-mdm project skeleton"
+code .
+```

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "builds": [],
+  "routes": [
+    { "src": "^/dashboard(.*)", "dest": "/dashboard.html" },
+    { "src": "^/enrollment", "dest": "/enrollment.html" },
+    { "src": "^/login", "dest": "/login.html" },
+    { "src": "^/.*", "dest": "/index.html" }
+  ]
+}
