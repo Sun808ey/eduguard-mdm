@@ -2,6 +2,16 @@
 
 This repository is the frontend for the EduGuard MDM proof-of-concept MVP.
 
+To run the frontend together with the audit API, start the API first in `eduguard-api`, then serve this folder on a second port:
+
+```powershell
+cd "c:\Users\SUN\Downloads\Compressed\Eduguard-main\Eduguard-main\eduguard-api"
+npm run start:dev
+
+cd "c:\Users\SUN\Downloads\Compressed\Eduguard-main\Eduguard-main\eduguard-mdm"
+python -m http.server 8001 --bind 127.0.0.1 --directory .
+```
+
 Step 1 completed here: initial project skeleton and placeholder files.
 
 Next steps:
