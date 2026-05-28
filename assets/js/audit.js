@@ -1,5 +1,73 @@
 import { RECENT_AUDIT_LOG } from './mock-data.js';
 
+const STORAGE_KEY = 'eduguard.auditEntries.v1';
+let memoryAuditEntries = null;
+
+function getInitialAuditEntries() {
+  return RECENT_AUDIT_LOG.map((entry) => ({ ...entry }));
+}
+
+function canUseLocalStorage() {
+  try {
+    return typeof window !== 'undefined' && !!window.localStorage;
+  } catch (error) {
+    return false;
+  }
+}
+
+function loadAuditEntries() {
+  if (memoryAuditEntries) return memoryAuditEntries.map((entry) => ({ ...entry }));
+
+  if (canUseLocalStorage()) {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length) {
+          memoryAuditEntries = parsed;
+          return parsed.map((entry) => ({ ...entry }));
+        }
+      }
+    } catch (error) {
+      // Fall through to seeded defaults.
+    }
+  }
+
+  memoryAuditEntries = getInitialAuditEntries();
+  persistAuditEntries(memoryAuditEntries);
+  return memoryAuditEntries.map((entry) => ({ ...entry }));
+}
+
+function persistAuditEntries(entries) {
+  memoryAuditEntries = entries.map((entry) => ({ ...entry }));
+
+  if (!canUseLocalStorage()) return;
+
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(memoryAuditEntries));
+  } catch (error) {
+    // Persistence is best-effort; keep the in-memory copy alive.
+  }
+}
+
+function appendAuditEntry(entry) {
+  const currentEntries = loadAuditEntries();
+  const nextEntries = [entry, ...currentEntries].slice(0, 100);
+  persistAuditEntries(nextEntries);
+  return nextEntries.map((item) => ({ ...item }));
+}
+
+function createPseudoHash(seed) {
+  const timestampFragment = Date.now().toString(16);
+  const randomFragment = Math.random().toString(16).slice(2, 18);
+  const base = `${seed}:${timestampFragment}:${randomFragment}`;
+  let hash = '';
+  for (let index = 0; index < base.length; index += 1) {
+    hash += base.charCodeAt(index).toString(16).padStart(2, '0');
+  }
+  return hash.slice(0, 40).padEnd(40, '0');
+}
+
 function renderAuditControls(container) {
   const controls = document.createElement('div');
   controls.className = 'audit-controls';
@@ -15,20 +83,33 @@ function renderAuditControls(container) {
   const result = controls.querySelector('[data-audit-result]');
 
   verifyBtn.addEventListener('click', () => {
-    const verification = verifyChain(RECENT_AUDIT_LOG);
+    const auditEntries = loadAuditEntries();
+    const verification = verifyChain(auditEntries);
     if (verification.ok) {
       result.textContent = `Verified: ${verification.message}`;
       result.classList.remove('audit-result--bad');
       result.classList.add('audit-result--ok');
+      appendAuditEntry({
+        eventType: 'Verification',
+        description: 'Audit chain verified from the dashboard',
+        hash: createPseudoHash('verification-ok'),
+        timestamp: new Date().toISOString(),
+      });
     } else {
       result.textContent = `Broken: ${verification.message}`;
       result.classList.remove('audit-result--ok');
       result.classList.add('audit-result--bad');
+      appendAuditEntry({
+        eventType: 'Verification',
+        description: `Audit chain check failed: ${verification.message}`,
+        hash: createPseudoHash('verification-failed'),
+        timestamp: new Date().toISOString(),
+      });
     }
   });
 
   historyBtn.addEventListener('click', () => {
-    openAuditHistoryModal(RECENT_AUDIT_LOG);
+    openAuditHistoryModal(loadAuditEntries());
   });
 }
 
@@ -149,6 +230,12 @@ function showAuditDetail(entry) {
     // Lightweight single-entry check: ensure hash is non-empty and timestamp parseable
     if (entry.hash && !Number.isNaN(new Date(entry.timestamp).getTime())) {
       alert('Entry appears well-formed');
+      appendAuditEntry({
+        eventType: 'Detail View',
+        description: `Viewed audit entry ${entry.eventType}`,
+        hash: createPseudoHash(`detail-view:${entry.hash}`),
+        timestamp: new Date().toISOString(),
+      });
     } else {
       alert('Entry malformed');
     }
