@@ -188,6 +188,17 @@
 .audit-result--ok { color: #6ee7b7; }
 .audit-result--bad { color: #ff7b7b; }
 
+/* Audit modal and list */
+.audit-modal .audit-list { display: grid; gap: 0.5rem; max-height: 48vh; overflow: auto; }
+.audit-item { display: flex; gap: 0.75rem; align-items: center; padding: 0.6rem; border-radius: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); }
+.audit-item__left { width: 5.5rem; }
+.audit-item__main { flex: 1; }
+.audit-item__desc { color: #fff; font-weight: 700; }
+.audit-item__meta { color: var(--ui-muted); font-size: 0.86rem; margin-top: 0.25rem; }
+.audit-item__actions { margin-left: 0.5rem; }
+.audit-detail-modal .modal__body p { margin: 0.45rem 0; }
+
+
 
 	.dashboard-main {
 		padding-inline: 0.75rem;
