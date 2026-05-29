@@ -2,6 +2,7 @@
 
 .dashboard-page {
 	min-height: 100vh;
+	overflow-x: hidden;
 }
 
 .dashboard-shell {
@@ -175,6 +176,39 @@
 	.dashboard-topbar {
 		flex-direction: column;
 		align-items: flex-start;
+	}
+
+	.dashboard-main {
+		padding-inline: 0.75rem;
+	}
+
+	.overview-stat-grid,
+	.overview-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.panel__header,
+	.device-section__header,
+	.policy-section__header,
+	.pagination-bar {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.device-section__actions {
+		width: 100%;
+	}
+
+	.device-section__actions .btn,
+	.policy-section__header .btn {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.filter-bar,
+	.device-detail-grid,
+	.policy-grid {
+		grid-template-columns: 1fr;
 	}
 
 /* Audit chain controls */
