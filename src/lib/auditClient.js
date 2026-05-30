@@ -1,6 +1,33 @@
 import { RECENT_AUDIT_LOG } from '../data/mockData.js';
 
-const API_BASE_URL = 'http://127.0.0.1:3000';
+const DEFAULT_API_BASE_URLS = ['http://127.0.0.1:5000', 'http://127.0.0.1:3000'];
+
+function normalizeBaseUrl(value) {
+  if (typeof value !== 'string') return '';
+  return value.trim().replace(/\/+$/, '');
+}
+
+function getApiBaseUrls() {
+  const configuredBaseUrl = normalizeBaseUrl(typeof import.meta !== 'undefined' ? import.meta.env?.VITE_API_BASE_URL : '');
+  return [configuredBaseUrl, ...DEFAULT_API_BASE_URLS].filter((value, index, list) => Boolean(value) && list.indexOf(value) === index);
+}
+
+async function fetchJsonFromApi(path, init) {
+  for (const baseUrl of getApiBaseUrls()) {
+    try {
+      const response = await fetch(`${baseUrl}${path}`, init);
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.warn(`API request failed for ${baseUrl}${path}.`, error);
+    }
+  }
+
+  return null;
+}
 
 export function createPseudoHash(seed) {
   const timestampFragment = Date.now().toString(16);
@@ -26,17 +53,12 @@ function cloneEntries() {
 
 export async function loadAuditEntries() {
   try {
-    const response = await fetch(`${API_BASE_URL}/audit-entries`, {
+    const payload = await fetchJsonFromApi('/audit-entries', {
       headers: { Accept: 'application/json' },
     });
 
-    if (!response.ok) {
-      throw new Error(`Failed to load audit entries: ${response.status}`);
-    }
-
-    const payload = await response.json();
     if (Array.isArray(payload)) return payload;
-    if (Array.isArray(payload.entries)) return payload.entries;
+    if (payload && Array.isArray(payload.entries)) return payload.entries;
   } catch (error) {
     console.warn('Falling back to seeded audit entries.', error);
   }
@@ -46,17 +68,11 @@ export async function loadAuditEntries() {
 
 export async function appendAuditEntry(entry) {
   try {
-    const response = await fetch(`${API_BASE_URL}/audit-entries`, {
+    return await fetchJsonFromApi('/audit-entries', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify(entry),
     });
-
-    if (!response.ok) {
-      throw new Error(`Failed to persist audit entry: ${response.status}`);
-    }
-
-    return await response.json();
   } catch (error) {
     console.warn('Audit entry persistence failed.', error);
     return null;
@@ -65,16 +81,11 @@ export async function appendAuditEntry(entry) {
 
 export async function fetchAuditVerification() {
   try {
-    const response = await fetch(`${API_BASE_URL}/audit-entries/verify`, {
+    const payload = await fetchJsonFromApi('/audit-entries/verify', {
       headers: { Accept: 'application/json' },
     });
 
-    if (!response.ok) {
-      throw new Error(`Failed to verify audit entries: ${response.status}`);
-    }
-
-    const payload = await response.json();
-    if (typeof payload.ok === 'boolean' && typeof payload.message === 'string') {
+    if (payload && typeof payload.ok === 'boolean' && typeof payload.message === 'string') {
       return payload;
     }
   } catch (error) {
