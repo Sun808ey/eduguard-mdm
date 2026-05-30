@@ -1,1 +1,1 @@
-export * from '../../assets/js/mock-data.js';
+export * from './mock-data.js';

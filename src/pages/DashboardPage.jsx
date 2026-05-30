@@ -379,7 +379,7 @@ export function DashboardPage() {
   };
 
   return (
-    <div className="dashboard-shell">
+    <div className="dashboard-overview">
       <header className="dashboard-topbar">
         <div className="dashboard-topbar__title">
           <h1>Overview</h1>
