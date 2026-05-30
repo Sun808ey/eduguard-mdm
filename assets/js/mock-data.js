@@ -49,6 +49,38 @@ export const RECENT_VIOLATIONS = [
 		policyViolated: 'App Whitelist',
 		timestamp: '2026-05-27T13:35:00Z',
 		status: 'Open'
+	},
+	{
+		severity: 'HIGH',
+		device: 'Samsung A13 - EDG-025',
+		violationType: 'Unauthorized hotspot enabled',
+		policyViolated: 'Exam Kiosk',
+		timestamp: '2026-05-27T11:26:00Z',
+		status: 'Open'
+	},
+	{
+		severity: 'MED',
+		device: 'Itel A56 - EDG-012',
+		violationType: 'Restricted site attempted',
+		policyViolated: 'Web Filter',
+		timestamp: '2026-05-27T10:18:00Z',
+		status: 'Pending'
+	},
+	{
+		severity: 'LOW',
+		device: 'Tecno Pop 7 - EDG-035',
+		violationType: 'Battery saver bypassed',
+		policyViolated: 'Low Battery Protocol',
+		timestamp: '2026-05-27T09:42:00Z',
+		status: 'Resolved'
+	},
+	{
+		severity: 'MED',
+		device: 'Samsung A24 - EDG-043',
+		violationType: 'Unapproved app installed',
+		policyViolated: 'App Whitelist',
+		timestamp: '2026-05-27T08:55:00Z',
+		status: 'Open'
 	}
 ];
 
@@ -76,7 +108,156 @@ export const RECENT_AUDIT_LOG = [
 		description: 'Super Admin rotated policy signing keys',
 		hash: 'd6e3f40718293a4b5c6d7e8f901a2b3c4d5e6f70',
 		timestamp: '2026-05-27T17:20:00Z'
+	},
+	{
+		eventType: 'Enrollment',
+		description: 'New S.1 cohort devices imported into the registry',
+		hash: 'e7f4a50819e7f4a50819e7f4a50819e7f4a50819',
+		timestamp: '2026-05-27T16:05:00Z'
+	},
+	{
+		eventType: 'Policy Updated',
+		description: 'Web filter rules refreshed for study sessions',
+		hash: 'f8a5b6192af8a5b6192af8a5b6192af8a5b6192a',
+		timestamp: '2026-05-27T15:44:00Z'
+	},
+	{
+		eventType: 'Violation',
+		description: 'Hotspot usage blocked on Samsung A13',
+		hash: '09b6c71a3b09b6c71a3b09b6c71a3b09b6c71a3b',
+		timestamp: '2026-05-27T15:12:00Z'
+	},
+	{
+		eventType: 'Sync',
+		description: 'Nightly device heartbeat batch received',
+		hash: '1ac7d82b4c1ac7d82b4c1ac7d82b4c1ac7d82b4c',
+		timestamp: '2026-05-27T14:51:00Z'
+	},
+	{
+		eventType: 'Admin Action',
+		description: 'Teacher override granted for S.5 class rollout',
+		hash: '2bd8e93c5d2bd8e93c5d2bd8e93c5d2bd8e93c5d',
+		timestamp: '2026-05-27T14:22:00Z'
+	},
+	{
+		eventType: 'Enrollment',
+		description: 'Five replacement handsets enrolled for lab use',
+		hash: '3ce9fa4d6e3ce9fa4d6e3ce9fa4d6e3ce9fa4d6e',
+		timestamp: '2026-05-27T13:58:00Z'
+	},
+	{
+		eventType: 'Policy Applied',
+		description: 'Session schedule pushed to afternoon classes',
+		hash: '4dfa0b5e7f4dfa0b5e7f4dfa0b5e7f4dfa0b5e7f',
+		timestamp: '2026-05-27T13:31:00Z'
+	},
+	{
+		eventType: 'Violation',
+		description: 'Restricted browser request detected and logged',
+		hash: '5e0b1c6f805e0b1c6f805e0b1c6f805e0b1c6f80',
+		timestamp: '2026-05-27T13:04:00Z'
+	},
+	{
+		eventType: 'Sync',
+		description: 'Classroom nodes resynced after connectivity drop',
+		hash: '6f1c2d7a916f1c2d7a916f1c2d7a916f1c2d7a91',
+		timestamp: '2026-05-27T12:37:00Z'
+	},
+	{
+		eventType: 'Admin Action',
+		description: 'Audit keys validated before midday reporting',
+		hash: '701d3e8a02701d3e8a02701d3e8a02701d3e8a02',
+		timestamp: '2026-05-27T12:09:00Z'
+	},
+	{
+		eventType: 'Policy Updated',
+		description: 'Low battery alerts tuned for remote classrooms',
+		hash: '812e4f9a13812e4f9a13812e4f9a13812e4f9a13',
+		timestamp: '2026-05-27T11:44:00Z'
+	},
+	{
+		eventType: 'Violation',
+		description: 'Unapproved app install attempt denied',
+		hash: '923f50ab24923f50ab24923f50ab24923f50ab24',
+		timestamp: '2026-05-27T11:18:00Z'
+	},
+	{
+		eventType: 'Sync',
+		description: 'Morning sync completed for all S.6 devices',
+		hash: 'a34061bc35a34061bc35a34061bc35a34061bc35',
+		timestamp: '2026-05-27T10:50:00Z'
+	},
+	{
+		eventType: 'Enrollment',
+		description: 'Devices assigned to new examination invigilators',
+		hash: 'b45172cd46b45172cd46b45172cd46b45172cd46',
+		timestamp: '2026-05-27T10:23:00Z'
+	},
+	{
+		eventType: 'Policy Applied',
+		description: 'App whitelist refreshed with approved learning tools',
+		hash: 'c56283de57c56283de57c56283de57c56283de57',
+		timestamp: '2026-05-27T09:57:00Z'
+	},
+	{
+		eventType: 'Violation',
+		description: 'Social media access blocked during class hour',
+		hash: 'd67394ef68d67394ef68d67394ef68d67394ef68',
+		timestamp: '2026-05-27T09:29:00Z'
+	},
+	{
+		eventType: 'Admin Action',
+		description: 'Super Admin reviewed overnight exception queue',
+		hash: 'e784a50f79e784a50f79e784a50f79e784a50f79',
+		timestamp: '2026-05-27T09:03:00Z'
+	},
+	{
+		eventType: 'Sync',
+		description: 'Edge gateway replayed queued audit events',
+		hash: 'f895b6108af895b6108af895b6108af895b6108a',
+		timestamp: '2026-05-27T08:36:00Z'
+	},
+	{
+		eventType: 'Policy Updated',
+		description: 'Exam kiosk restrictions tightened for S.4',
+		hash: '0a06c7219b0a06c7219b0a06c7219b0a06c7219b',
+		timestamp: '2026-05-27T08:08:00Z'
+	},
+	{
+		eventType: 'Sync',
+		description: 'Border router completed a late-night checkpoint flush',
+		hash: '1b17d832ac1b17d832ac1b17d832ac1b17d832ac',
+		timestamp: '2026-05-27T07:41:00Z'
+	},
+	{
+		eventType: 'Violation',
+		description: 'Blocked app request recorded during after-hours testing',
+		hash: '2c28e943bd2c28e943bd2c28e943bd2c28e943bd',
+		timestamp: '2026-05-27T07:12:00Z'
 	}
+];
+
+export const WHITELISTED_APPS = [
+	'Google Classroom',
+	'Khan Academy',
+	'Microsoft Teams',
+	'Zoom',
+	'Moodle',
+	'CamScanner',
+	'WPS Office',
+	'PDF Reader Pro',
+	'Duolingo',
+	'BBC Bitesize',
+	'Coursera',
+	'Quizizz'
+];
+
+export const BLOCKED_APPS = [
+	'TikTok',
+	'Instagram',
+	'Facebook',
+	'Snapchat',
+	'WhatsApp Business'
 ];
 
 export const DASHBOARD_SUMMARY = {
