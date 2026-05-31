@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Chip } from '../../components/ui.jsx';
 import { DEVICE_CLASS_OPTIONS, DEVICE_STATUS_OPTIONS, DEVICES, OVERVIEW_STATS } from '../../data/mockData.js';
 import { useBodyClass } from '../../hooks/useBodyClass.js';
 import { loadDevices } from '../../lib/dashboardApi.js';
-import { SectionPage } from './SectionPage.jsx';
+import SectionPage from './SectionPage.jsx';
 
 function formatRelativeTime(isoString) {
   const diffMs = Date.now() - new Date(isoString).getTime();
@@ -16,7 +17,7 @@ function formatRelativeTime(isoString) {
   return `${days} day${days > 1 ? 's' : ''} ago`;
 }
 
-export function DevicesPage() {
+function DevicesPage() {
   useBodyClass('dashboard-page');
   const [devices, setDevices] = React.useState(DEVICES);
 
@@ -82,3 +83,7 @@ export function DevicesPage() {
     </SectionPage>
   );
 }
+
+DevicesPage.propTypes = {};
+
+export default DevicesPage;

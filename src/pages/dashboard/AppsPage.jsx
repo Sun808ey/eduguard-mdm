@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Chip } from '../../components/ui.jsx';
 import { BLOCKED_APPS, WHITELISTED_APPS } from '../../data/mockData.js';
 import { useBodyClass } from '../../hooks/useBodyClass.js';
 import { loadApps } from '../../lib/dashboardApi.js';
-import { SectionPage } from './SectionPage.jsx';
+import SectionPage from './SectionPage.jsx';
 
 function AppList({ title, items, tone }) {
   return (
@@ -16,7 +17,7 @@ function AppList({ title, items, tone }) {
   );
 }
 
-export function AppsPage() {
+function AppsPage() {
   useBodyClass('dashboard-page');
   const [whitelistedApps, setWhitelistedApps] = React.useState(WHITELISTED_APPS);
   const [blockedApps, setBlockedApps] = React.useState(BLOCKED_APPS);
@@ -46,3 +47,7 @@ export function AppsPage() {
     </SectionPage>
   );
 }
+
+AppsPage.propTypes = {};
+
+export default AppsPage;

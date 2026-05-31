@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { SectionHeading, logoUrl } from '../components/ui.jsx';
 import { OVERVIEW_STATS } from '../data/mockData.js';
 import { useBodyClass } from '../hooks/useBodyClass.js';
@@ -88,7 +89,7 @@ function HeroVisual() {
   );
 }
 
-export function LandingPage() {
+function LandingPage() {
   useBodyClass('landing-page');
   useDocumentTitle('EduGuard MDM — Offline-First Android Policy Enforcement');
 
@@ -364,3 +365,7 @@ export function LandingPage() {
     </>
   );
 }
+
+LandingPage.propTypes = {};
+
+export default LandingPage;

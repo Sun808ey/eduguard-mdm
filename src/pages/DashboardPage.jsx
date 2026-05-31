@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Chart from 'chart.js/auto';
 import {
   COMPLIANCE_BY_CLASS,
@@ -213,7 +214,7 @@ function formatBytes(bytes) {
   return `${(bytes / (1024 ** index)).toFixed(1)} ${units[index]}`;
 }
 
-export function DashboardPage() {
+function DashboardPage() {
   useBodyClass('dashboard-page');
   useDocumentTitle('EduGuard MDM — Dashboard Overview');
 
@@ -658,7 +659,7 @@ export function DashboardPage() {
           <p><strong>Description:</strong> {auditDetail.description}</p>
           <p><strong>SHA-256:</strong> <span className="hash-mono">{auditDetail.hash}</span></p>
           <p><strong>Timestamp:</strong> {new Date(auditDetail.timestamp).toLocaleString()}</p>
-          <div style={{ marginTop: '1rem' }}>
+          <div className="audit-detail-actions">
             <button className="btn btn-outline" type="button" onClick={async () => {
               const verification = auditDetail.hash && !Number.isNaN(new Date(auditDetail.timestamp).getTime());
               if (verification) {
@@ -673,7 +674,7 @@ export function DashboardPage() {
                 window.alert('Entry malformed');
               }
             }}>Verify entry</button>
-            <button className="btn btn-primary" type="button" style={{ marginLeft: '0.75rem' }} onClick={async () => {
+            <button className="btn btn-primary audit-detail-actions__button" type="button" onClick={async () => {
               try {
                 await navigator.clipboard.writeText(auditDetail.hash);
                 window.alert('Hash copied to clipboard');
@@ -687,3 +688,7 @@ export function DashboardPage() {
     </div>
   );
 }
+
+DashboardPage.propTypes = {};
+
+export default DashboardPage;

@@ -10,6 +10,9 @@
 	background: linear-gradient(180deg, #07111a 0%, #04090f 100%);
 }
 
+.sync-badge--online { background: rgba(39, 168, 95, 0.12); color: var(--ui-success); }
+.sync-badge--offline { background: rgba(224, 72, 72, 0.12); color: var(--ui-danger); }
+
 .dashboard-topbar {
 	display: flex;
 	align-items: center;
@@ -231,6 +234,10 @@
 .audit-item__meta { color: var(--ui-muted); font-size: 0.86rem; margin-top: 0.25rem; }
 .audit-item__actions { margin-left: 0.5rem; }
 .audit-detail-modal .modal__body p { margin: 0.45rem 0; }
+
+.reports-page__panel {
+	margin-top: 1rem;
+}
 
 
 

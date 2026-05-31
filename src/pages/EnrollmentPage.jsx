@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import QRCode from 'qrcode';
 import { logoUrl } from '../components/ui.jsx';
 import { useBodyClass } from '../hooks/useBodyClass.js';
@@ -30,7 +31,7 @@ function createSignedToken(group, passcode) {
   return btoa(JSON.stringify(payload));
 }
 
-export function EnrollmentPage() {
+function EnrollmentPage() {
   useBodyClass('enrollment-page');
   useDocumentTitle('EduGuard MDM — Enrollment');
 
@@ -239,7 +240,7 @@ export function EnrollmentPage() {
               </div>
 
               <div className={stage === 3 ? '' : 'hidden'} id="stepThreeState">
-                <div className="note-box" style={{ marginBottom: '1rem' }}>Enrollment confirmed. The device now appears in the pending list below.</div>
+                <div className="note-box note-box--spaced">Enrollment confirmed. The device now appears in the pending list below.</div>
                 <div className="pending-list" id="pendingList">
                   {pending.slice().reverse().map((item) => (
                     <article className="pending-item" key={`${item.group}-${item.token}`}>
@@ -259,3 +260,7 @@ export function EnrollmentPage() {
     </>
   );
 }
+
+EnrollmentPage.propTypes = {};
+
+export default EnrollmentPage;

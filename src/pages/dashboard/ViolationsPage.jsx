@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Chip } from '../../components/ui.jsx';
 import { RECENT_VIOLATIONS } from '../../data/mockData.js';
 import { useBodyClass } from '../../hooks/useBodyClass.js';
 import { loadViolations } from '../../lib/dashboardApi.js';
-import { SectionPage } from './SectionPage.jsx';
+import SectionPage from './SectionPage.jsx';
 
 function formatRelativeTime(isoString) {
   const diffMs = Date.now() - new Date(isoString).getTime();
@@ -15,7 +16,7 @@ function formatRelativeTime(isoString) {
   return `${days} day${days > 1 ? 's' : ''} ago`;
 }
 
-export function ViolationsPage() {
+function ViolationsPage() {
   useBodyClass('dashboard-page');
   const [violations, setViolations] = React.useState(RECENT_VIOLATIONS);
 
@@ -67,3 +68,7 @@ export function ViolationsPage() {
     </SectionPage>
   );
 }
+
+ViolationsPage.propTypes = {};
+
+export default ViolationsPage;

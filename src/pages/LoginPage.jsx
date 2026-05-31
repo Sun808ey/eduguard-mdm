@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Badge, logoUrl } from '../components/ui.jsx';
 import { useBodyClass } from '../hooks/useBodyClass.js';
 import { useDocumentTitle } from '../hooks/useDocumentTitle.js';
@@ -8,7 +9,7 @@ const EXPECTED_EMAIL = 'admin@eduguard-mdm.ug';
 const EXPECTED_PASSWORD = 'EduGuard2025';
 const EXPECTED_OTP = '246810';
 
-export function LoginPage() {
+function LoginPage() {
   useBodyClass('login-page');
   useDocumentTitle('EduGuard MDM — Admin Login');
 
@@ -226,3 +227,7 @@ export function LoginPage() {
     </main>
   );
 }
+
+LoginPage.propTypes = {};
+
+export default LoginPage;

@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Chip } from '../../components/ui.jsx';
 import { RECENT_AUDIT_LOG } from '../../data/mockData.js';
 import { fetchAuditVerification, loadAuditEntries, truncateHash } from '../../lib/auditClient.js';
 import { useBodyClass } from '../../hooks/useBodyClass.js';
-import { SectionPage } from './SectionPage.jsx';
+import SectionPage from './SectionPage.jsx';
 
 function formatRelativeTime(isoString) {
   const diffMs = Date.now() - new Date(isoString).getTime();
@@ -15,7 +16,7 @@ function formatRelativeTime(isoString) {
   return `${days} day${days > 1 ? 's' : ''} ago`;
 }
 
-export function AuditLogPage() {
+function AuditLogPage() {
   useBodyClass('dashboard-page');
   const [status, setStatus] = React.useState('Chain status available from seeded data');
   const [rows, setRows] = React.useState(RECENT_AUDIT_LOG);
@@ -71,3 +72,7 @@ export function AuditLogPage() {
     </SectionPage>
   );
 }
+
+AuditLogPage.propTypes = {};
+
+export default AuditLogPage;

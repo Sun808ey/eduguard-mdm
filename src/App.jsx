@@ -1,19 +1,19 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { DashboardPage } from './pages/DashboardPage.jsx';
-import { DashboardShell } from './pages/dashboard/DashboardShell.jsx';
-import { AppsPage } from './pages/dashboard/AppsPage.jsx';
-import { AuditLogPage } from './pages/dashboard/AuditLogPage.jsx';
-import { DevicesPage } from './pages/dashboard/DevicesPage.jsx';
-import { EnrollmentPage } from './pages/EnrollmentPage.jsx';
-import { LandingPage } from './pages/LandingPage.jsx';
-import { LoginPage } from './pages/LoginPage.jsx';
-import { PoliciesPage } from './pages/dashboard/PoliciesPage.jsx';
-import { ReportsPage } from './pages/dashboard/ReportsPage.jsx';
-import { SettingsPage } from './pages/dashboard/SettingsPage.jsx';
-import { ViolationsPage } from './pages/dashboard/ViolationsPage.jsx';
-import { NotFoundPage } from './pages/NotFoundPage.jsx';
+import DashboardPage from './pages/DashboardPage.jsx';
+import DashboardShell from './pages/dashboard/DashboardShell.jsx';
+import AppsPage from './pages/dashboard/AppsPage.jsx';
+import AuditLogPage from './pages/dashboard/AuditLogPage.jsx';
+import DevicesPage from './pages/dashboard/DevicesPage.jsx';
+import EnrollmentPage from './pages/EnrollmentPage.jsx';
+import LandingPage from './pages/LandingPage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+import PoliciesPage from './pages/dashboard/PoliciesPage.jsx';
+import ReportsPage from './pages/dashboard/ReportsPage.jsx';
+import SettingsPage from './pages/dashboard/SettingsPage.jsx';
+import ViolationsPage from './pages/dashboard/ViolationsPage.jsx';
+import NotFoundPage from './pages/NotFoundPage.jsx';
 
-export function App() {
+function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
@@ -38,3 +38,5 @@ export function App() {
     </Routes>
   );
 }
+
+export default App;

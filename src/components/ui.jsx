@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import logoUrl from '../../assets/img/logo.svg';
 
 export { logoUrl };
 
-export function LogoBrand({ to = '/', compact = false, className = '', ariaLabel = 'EduGuard MDM home' }) {
+function LogoBrand({ to = '/', compact = false, className = '', ariaLabel = 'EduGuard MDM home' }) {
   return (
     <Link className={className} to={to} aria-label={ariaLabel}>
       <img src={logoUrl} alt="EduGuard MDM" className="brand__logo" />
@@ -15,7 +16,7 @@ export function LogoBrand({ to = '/', compact = false, className = '', ariaLabel
   );
 }
 
-export function SectionHeading({ eyebrow, title, children }) {
+function SectionHeading({ eyebrow, title, children }) {
   return (
     <div className="section-heading">
       {eyebrow ? <span className="section-label">{eyebrow}</span> : null}
@@ -25,7 +26,7 @@ export function SectionHeading({ eyebrow, title, children }) {
   );
 }
 
-export function Chip({ children, className = '', title }) {
+function Chip({ children, className = '', title }) {
   return (
     <span className={`chip ${className}`.trim()} title={title}>
       {children}
@@ -33,14 +34,14 @@ export function Chip({ children, className = '', title }) {
   );
 }
 
-export function Badge({ children, tone = 'default', className = '' }) {
+function Badge({ children, tone = 'default', className = '' }) {
   const toneClass = tone === 'default' ? '' : `badge--${tone}`;
   return <span className={`badge ${toneClass} ${className}`.trim()}>{children}</span>;
 }
 
-export function ModalShell({ title, titleId, onClose, children, className = '', actions = null }) {
+function ModalShell({ title, titleId, onClose, children, className = '', actions = null }) {
   return (
-    <div className="modal-backdrop" style={{ display: 'flex' }}>
+    <div className="modal-backdrop">
       <section className={`modal ${className}`.trim()} role="dialog" aria-modal="true" aria-labelledby={titleId}>
         <div className="modal__header">
           <h2 id={titleId}>{title}</h2>
@@ -54,3 +55,43 @@ export function ModalShell({ title, titleId, onClose, children, className = '', 
     </div>
   );
 }
+
+LogoBrand.propTypes = {
+  to: PropTypes.string,
+  compact: PropTypes.bool,
+  className: PropTypes.string,
+  ariaLabel: PropTypes.string,
+};
+
+SectionHeading.propTypes = {
+  eyebrow: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node,
+};
+
+Chip.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  title: PropTypes.string,
+};
+
+Badge.propTypes = {
+  children: PropTypes.node.isRequired,
+  tone: PropTypes.string,
+  className: PropTypes.string,
+};
+
+ModalShell.propTypes = {
+  title: PropTypes.string.isRequired,
+  titleId: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  actions: PropTypes.node,
+};
+
+const UI = { LogoBrand, SectionHeading, Chip, Badge, ModalShell };
+
+export default UI;
+
+export { LogoBrand, SectionHeading, Chip, Badge, ModalShell };

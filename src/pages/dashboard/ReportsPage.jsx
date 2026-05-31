@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Chip } from '../../components/ui.jsx';
 import { COMPLIANCE_BY_CLASS, DASHBOARD_SUMMARY, OVERVIEW_STATS } from '../../data/mockData.js';
 import { useBodyClass } from '../../hooks/useBodyClass.js';
 import { loadReportsSnapshot } from '../../lib/dashboardApi.js';
-import { SectionPage } from './SectionPage.jsx';
+import SectionPage from './SectionPage.jsx';
 
-export function ReportsPage() {
+function ReportsPage() {
   useBodyClass('dashboard-page');
   const [reportSnapshot, setReportSnapshot] = React.useState({
     overviewStats: OVERVIEW_STATS,
@@ -38,7 +39,7 @@ export function ReportsPage() {
         ))}
       </div>
 
-      <section className="panel" style={{ marginTop: '1rem' }}>
+      <section className="panel reports-page__panel">
         <div className="panel__header"><h2>Compliance by class</h2><Chip>Snapshot</Chip></div>
         <div className="table-scroll">
           <table className="dashboard-table" aria-label="Compliance by class">
@@ -62,3 +63,7 @@ export function ReportsPage() {
     </SectionPage>
   );
 }
+
+ReportsPage.propTypes = {};
+
+export default ReportsPage;

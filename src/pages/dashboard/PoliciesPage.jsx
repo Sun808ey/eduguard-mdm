@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Chip } from '../../components/ui.jsx';
 import { POLICIES } from '../../data/mockData.js';
 import { useBodyClass } from '../../hooks/useBodyClass.js';
 import { loadPolicies } from '../../lib/dashboardApi.js';
-import { SectionPage } from './SectionPage.jsx';
+import SectionPage from './SectionPage.jsx';
 
-export function PoliciesPage() {
+function PoliciesPage() {
   useBodyClass('dashboard-page');
   const [policies, setPolicies] = React.useState(POLICIES);
 
@@ -51,3 +52,7 @@ export function PoliciesPage() {
     </SectionPage>
   );
 }
+
+PoliciesPage.propTypes = {};
+
+export default PoliciesPage;

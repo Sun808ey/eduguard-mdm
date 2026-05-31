@@ -1,7 +1,8 @@
 import { Chip } from '../../components/ui.jsx';
+import PropTypes from 'prop-types';
 import { useDocumentTitle } from '../../hooks/useDocumentTitle.js';
 
-export function SectionPage({ title, subtitle, chips = [], actions = null, children }) {
+function SectionPage({ title, subtitle, chips = [], actions = null, children }) {
   useDocumentTitle(`EduGuard MDM — ${title}`);
 
   return (
@@ -21,3 +22,13 @@ export function SectionPage({ title, subtitle, chips = [], actions = null, child
     </main>
   );
 }
+
+SectionPage.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired,
+  chips: PropTypes.arrayOf(PropTypes.string),
+  actions: PropTypes.node,
+  children: PropTypes.node.isRequired,
+};
+
+export default SectionPage;

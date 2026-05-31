@@ -1,6 +1,8 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { LogoBrand, Chip } from '../../components/ui.jsx';
 import { useBodyClass } from '../../hooks/useBodyClass.js';
+import useSyncStatus from '../../hooks/useSyncStatus.js';
 
 const NAV_ITEMS = [
   { to: '/dashboard', label: 'Overview', end: true },
@@ -13,8 +15,9 @@ const NAV_ITEMS = [
   { to: '/dashboard/settings', label: 'Settings' },
 ];
 
-export function DashboardShell() {
+function DashboardShell() {
   useBodyClass('dashboard-page');
+  const syncStatus = useSyncStatus();
 
   return (
     <div className="dashboard-shell dashboard-shell--router">
@@ -33,6 +36,9 @@ export function DashboardShell() {
         <div className="dashboard-nav__footer">
           <Chip>LAN-ready</Chip>
           <Chip>Vercel frontend</Chip>
+          <Chip className={`sync-badge sync-badge--${syncStatus.tone}`} aria-label={`Sync status ${syncStatus.label}`}>
+            {syncStatus.label}
+          </Chip>
         </div>
       </aside>
 
@@ -42,3 +48,7 @@ export function DashboardShell() {
     </div>
   );
 }
+
+DashboardShell.propTypes = {};
+
+export default DashboardShell;

@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Chip } from '../../components/ui.jsx';
 import { DASHBOARD_SUMMARY } from '../../data/mockData.js';
 import { useBodyClass } from '../../hooks/useBodyClass.js';
 import { loadSettingsSnapshot } from '../../lib/dashboardApi.js';
-import { SectionPage } from './SectionPage.jsx';
+import SectionPage from './SectionPage.jsx';
 
 const SETTINGS = [
   { label: 'LAN server mode', value: 'Enabled' },
@@ -12,7 +13,7 @@ const SETTINGS = [
   { label: 'Audit storage', value: 'Seeded in Phase 1' },
 ];
 
-export function SettingsPage() {
+function SettingsPage() {
   useBodyClass('dashboard-page');
   const [settings, setSettings] = React.useState([
     { label: 'LAN server mode', value: 'Enabled' },
@@ -62,3 +63,7 @@ export function SettingsPage() {
     </SectionPage>
   );
 }
+
+SettingsPage.propTypes = {};
+
+export default SettingsPage;
