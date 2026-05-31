@@ -2,6 +2,7 @@ import { COMPLIANCE_BY_CLASS, DASHBOARD_SUMMARY, OVERVIEW_STATS, RECENT_AUDIT_LO
 import { initDevicesSection } from './devices.js';
 import { initPoliciesSection } from './policies.js';
 import { initAuditSection } from './audit.js';
+import { requestAuthSession, subscribeAuthSession } from './auth-session.js';
 
 function formatRelativeTime(isoString) {
   const diffMs = Date.now() - new Date(isoString).getTime();
@@ -170,4 +171,24 @@ function init() {
   initAuditSection();
 }
 
-document.addEventListener('DOMContentLoaded', init);
+async function initAuthenticatedDashboard() {
+  const session = await requestAuthSession();
+  if (!session || !session.accessToken || !session.role) {
+    window.location.href = 'login.html';
+    return;
+  }
+
+  subscribeAuthSession((message) => {
+    if (message.type === 'session-cleared' || message.type === 'session-invalid') {
+      window.location.href = 'login.html';
+    }
+  });
+
+  init();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initAuthenticatedDashboard().catch(() => {
+    window.location.href = 'login.html';
+  });
+});
