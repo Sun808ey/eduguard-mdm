@@ -1,6 +1,6 @@
-# EduGuard MDM — Frontend (eduguard-mdm)
+# EduGuard system — Frontend (eduguard-mdm)
 
-This repository is the frontend for the EduGuard MDM proof-of-concept MVP.
+This repository is the frontend for the EduGuard system proof-of-concept MVP.
 
 In production, the app is meant to be deployed to Vercel and pointed at the Flask backend with `VITE_API_BASE_URL`. The dashboard keeps working offline by falling back to seeded data if the backend cannot be reached.
 

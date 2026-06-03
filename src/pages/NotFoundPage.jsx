@@ -5,7 +5,7 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle.js';
 
 function NotFoundPage() {
   useBodyClass('not-found-page');
-  useDocumentTitle('EduGuard MDM — Not Found');
+  useDocumentTitle('EduGuard system — Not Found');
 
   return (
     <main className="not-found-page__shell">

@@ -91,7 +91,7 @@ function HeroVisual() {
 
 function LandingPage() {
   useBodyClass('landing-page');
-  useDocumentTitle('EduGuard MDM — Offline-First Android Policy Enforcement');
+  useDocumentTitle('EduGuard system — Offline-First Android Policy Enforcement');
 
   const formRef = React.useRef(null);
   const statusRef = React.useRef(null);
@@ -162,7 +162,7 @@ function LandingPage() {
               <span className="section-label">Ugandan secondary schools</span>
               <h1>Offline-first Android policy enforcement for schools that cannot depend on the internet.</h1>
               <p className="hero__lead">
-                EduGuard MDM helps Super Admin, ICT Teacher, and Class Teacher roles enforce school device policy with
+                EduGuard system helps Super Admin, ICT Teacher, and Class Teacher roles enforce school device policy with
                 AES-256 encryption, RSA-2048 signatures, SHA-256 hash-chained audit logs, RBAC, and LAN-based sync.
               </p>
 
@@ -270,7 +270,7 @@ function LandingPage() {
             <div>
               <span className="section-label">Academic context</span>
               <h2>Final year Computer Security &amp; Forensics proof of concept.</h2>
-              <p>EduGuard MDM demonstrates how Android Device Policy Controller (DPC) workflows can be adapted to Ugandan secondary school constraints.</p>
+              <p>EduGuard system demonstrates how Android Device Policy Controller (DPC) workflows can be adapted to Ugandan secondary school constraints.</p>
             </div>
             <div className="tag-cloud" aria-label="Technology stack">
               <span className="chip">HTML5</span>
@@ -291,7 +291,7 @@ function LandingPage() {
               <p>Send school, role, and contact details. The form validates locally and shows a success state on submission.</p>
               <ul className="contact-list">
                 <li><strong>Location:</strong> Kampala, Uganda</li>
-                <li><strong>Email:</strong> demo@eduguard-mdm.ug</li>
+                <li><strong>Email:</strong> demo@eduguard-system.ug</li>
                 <li><strong>Support:</strong> GitHub / docs / school LAN setup</li>
               </ul>
             </div>
@@ -335,7 +335,7 @@ function LandingPage() {
       <footer className="landing-footer">
         <div className="container footer-grid">
           <div>
-            <img src={logoUrl} alt="EduGuard MDM" className="footer-logo" />
+            <img src={logoUrl} alt="EduGuard system" className="footer-logo" />
             <p>Offline-first policy enforcement for educational environments in Uganda.</p>
           </div>
           <div>
@@ -358,7 +358,7 @@ function LandingPage() {
           </div>
         </div>
         <div className="container footer-bottom">
-          <small>© 2026 EduGuard MDM. Bachelor of Science in Computer Security and Forensics.</small>
+          <small>© 2026 EduGuard system. Bachelor of Science in Computer Security and Forensics.</small>
           <small>Uganda context • Offline-first • LAN sync</small>
         </div>
       </footer>

@@ -216,7 +216,7 @@ function formatBytes(bytes) {
 
 function DashboardPage() {
   useBodyClass('dashboard-page');
-  useDocumentTitle('EduGuard MDM — Dashboard Overview');
+  useDocumentTitle('EduGuard system — Dashboard Overview');
 
   const [search, setSearch] = React.useState('');
   const [classFilter, setClassFilter] = React.useState('All Classes');
@@ -384,7 +384,7 @@ function DashboardPage() {
       <header className="dashboard-topbar">
         <div className="dashboard-topbar__title">
           <h1>Overview</h1>
-          <p>EduGuard MDM • Kampala Secondary School</p>
+          <p>EduGuard system • Kampala Secondary School</p>
         </div>
         <div className="dashboard-topbar__meta" data-dashboard-meta>
           <Chip>{DASHBOARD_SUMMARY.schoolName}</Chip>

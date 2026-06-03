@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useDocumentTitle } from '../../hooks/useDocumentTitle.js';
 
 function SectionPage({ title, subtitle, chips = [], actions = null, children }) {
-  useDocumentTitle(`EduGuard MDM — ${title}`);
+  useDocumentTitle(`EduGuard system — ${title}`);
 
   return (
     <main className="dashboard-main dashboard-section-page">

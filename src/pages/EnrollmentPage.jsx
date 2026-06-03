@@ -33,7 +33,7 @@ function createSignedToken(group, passcode) {
 
 function EnrollmentPage() {
   useBodyClass('enrollment-page');
-  useDocumentTitle('EduGuard MDM — Enrollment');
+  useDocumentTitle('EduGuard system — Enrollment');
 
   const [classGroup, setClassGroup] = React.useState(CLASS_GROUPS[0]);
   const [adminPasscode, setAdminPasscode] = React.useState('');
@@ -152,8 +152,8 @@ function EnrollmentPage() {
 
       <main className="enrollment-shell" id="main-content">
         <div className="enrollment-topbar">
-          <Link className="enrollment-brand" to="/" aria-label="EduGuard MDM home">
-            <img src={logoUrl} alt="EduGuard MDM" />
+          <Link className="enrollment-brand" to="/" aria-label="EduGuard system home">
+            <img src={logoUrl} alt="EduGuard system" />
             <span>
               <strong>EduGuard</strong>
               <small>Enrollment wizard</small>

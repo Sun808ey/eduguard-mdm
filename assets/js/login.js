@@ -1,7 +1,7 @@
-// Login page logic for EduGuard MDM
+// Login page logic for EduGuard system
 // Handles credential validation, show/hide password, 2FA code entry, and redirect.
 (function () {
-  const EXPECTED_EMAIL = 'admin@eduguard-mdm.ug';
+  const EXPECTED_EMAIL = 'admin@eduguard-system.ug';
   const EXPECTED_PASSWORD = 'EduGuard2025';
   const EXPECTED_OTP = '246810';
 

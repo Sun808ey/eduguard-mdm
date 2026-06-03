@@ -1,4 +1,4 @@
-// QR enrollment wizard for EduGuard MDM.
+// QR enrollment wizard for EduGuard system.
 (function () {
   const body = document.body;
   if (!body || !body.classList.contains('enrollment-page')) return;

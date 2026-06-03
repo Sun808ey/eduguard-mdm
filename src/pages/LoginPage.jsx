@@ -5,13 +5,13 @@ import { Badge, logoUrl } from '../components/ui.jsx';
 import { useBodyClass } from '../hooks/useBodyClass.js';
 import { useDocumentTitle } from '../hooks/useDocumentTitle.js';
 
-const EXPECTED_EMAIL = 'admin@eduguard-mdm.ug';
+const EXPECTED_EMAIL = 'admin@eduguard-system.ug';
 const EXPECTED_PASSWORD = 'EduGuard2025';
 const EXPECTED_OTP = '246810';
 
 function LoginPage() {
   useBodyClass('login-page');
-  useDocumentTitle('EduGuard MDM — Admin Login');
+  useDocumentTitle('EduGuard system — Admin Login');
 
   const navigate = useNavigate();
   const [email, setEmail] = React.useState('');
@@ -124,9 +124,9 @@ function LoginPage() {
     <main className="login-shell">
       <section className="login-card" aria-labelledby="login-title">
         <div className="login-brand">
-          <img src={logoUrl} alt="EduGuard MDM" className="login-brand__logo" />
+          <img src={logoUrl} alt="EduGuard system" className="login-brand__logo" />
           <div>
-            <p className="login-brand__eyebrow">EduGuard MDM</p>
+            <p className="login-brand__eyebrow">EduGuard system</p>
             <h1 id="login-title">Admin Login</h1>
           </div>
         </div>
@@ -143,7 +143,7 @@ function LoginPage() {
               name="email"
               type="email"
               autoComplete="username"
-              placeholder="admin@eduguard-mdm.ug"
+              placeholder="admin@eduguard-system.ug"
               required
               value={email}
               onChange={(event) => setEmail(event.target.value)}
@@ -221,7 +221,7 @@ function LoginPage() {
         </form>
 
         <p className="login-card__hint">
-          Mock credentials: <strong>admin@eduguard-mdm.ug</strong> / <strong>EduGuard2025</strong>
+          Mock credentials: <strong>admin@eduguard-system.ug</strong> / <strong>EduGuard2025</strong>
         </p>
       </section>
     </main>

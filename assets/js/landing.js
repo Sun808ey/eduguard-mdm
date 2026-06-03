@@ -1,4 +1,4 @@
-// Landing page interactions for EduGuard MDM
+// Landing page interactions for EduGuard system
 // Lightweight, unobtrusive, and safe: runs only on the landing page.
 (function () {
   function qs(selector, root = document) {

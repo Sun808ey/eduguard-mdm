@@ -1,4 +1,4 @@
-// Mock data for EduGuard MDM
+// Mock data for EduGuard system
 // Phase 1: static data only. Later steps can replace imports with API calls.
 
 export const OVERVIEW_STATS = [

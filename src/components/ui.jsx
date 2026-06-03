@@ -4,13 +4,13 @@ import logoUrl from '../../assets/img/logo.svg';
 
 export { logoUrl };
 
-function LogoBrand({ to = '/', compact = false, className = '', ariaLabel = 'EduGuard MDM home' }) {
+function LogoBrand({ to = '/', compact = false, className = '', ariaLabel = 'EduGuard system home' }) {
   return (
     <Link className={className} to={to} aria-label={ariaLabel}>
-      <img src={logoUrl} alt="EduGuard MDM" className="brand__logo" />
+      <img src={logoUrl} alt="EduGuard system" className="brand__logo" />
       <span className="brand__text">
         <strong>EduGuard</strong>
-        {compact ? <small>MDM</small> : <span>MDM</span>}
+        {compact ? <small>system</small> : <span>system</span>}
       </span>
     </Link>
   );
